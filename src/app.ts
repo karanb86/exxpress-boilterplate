@@ -4,6 +4,7 @@ import { ENV_ENVIRONMENT } from './utils/secrets.util';
 import { APP_ENV } from './utils/constants.util';
 import _ from 'lodash';
 import { apiRoutes } from './routes/api.routes';
+import { instantiateServices } from './services/instantiate.service';
 
 export class Application {
   private readonly APP: express.Application;
@@ -16,6 +17,7 @@ export class Application {
     this.APP = express();
     this.PORT = port;
     this.setupCORS();
+    instantiateServices();
     this.initRoutes();
   }
 

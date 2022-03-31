@@ -1,5 +1,5 @@
 # Ignore built ts files
-dist/**/*
+dist
 package-lock.json
 
 # API keys and secrets
