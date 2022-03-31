@@ -1,0 +1,16 @@
+# Ignore built ts files
+dist/**/*
+package-lock.json
+
+# API keys and secrets
+.env
+
+.idea
+*.iml
+
+# Dependency directory
+node_modules
+
+# OS metadata
+.DS_Store
+Thumbs.db
