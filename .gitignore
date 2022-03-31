@@ -1,6 +1,7 @@
 # Ignore built ts files
 dist
 package-lock.json
+yarn.lock
 
 # API keys and secrets
 .env

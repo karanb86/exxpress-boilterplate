@@ -4,29 +4,40 @@
   "description": "",
   "main": "dist/server.js",
   "scripts": {
-    "build": "tsc",
-    "start": "tsc & nodemon ."
+    "watch-ts": "tsc -w",
+    "serve-inspect": "set NODE_ENV=dev && nodemon --inspect dist/server.js",
+    "build-ts": "tsc",
+    "start": "tsc & nodemon .",
+    "watch-debug": "concurrently -k -p \"[{name}]\" -n \"TypeScript,Node\" -c \"yellow.bold,cyan.bold,green.bold\" \"npm run watch-ts\" \"npm run serve-inspect\"",
+    "prebuild": "rm -rf dist",
+    "build": "npm run build-ts",
+    "debug": "yarn run build && yarn run watch-debug"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "body-parser": "^1.19.2",
     "concurrently": "^7.0.0",
     "cors": "^2.8.5",
     "dotenv": "^16.0.0",
+    "errorhandler": "^1.5.1",
     "express": "^4.17.3",
     "lodash": "^4.17.21",
     "mysql2": "^2.3.3",
     "reflect-metadata": "^0.1.13",
     "sequelize": "^6.17.0",
-    "sequelize-typescript": "^2.1.3"
+    "sequelize-typescript": "^2.1.3",
+    "validatorjs": "^3.22.1"
   },
   "devDependencies": {
     "@types/cors": "^2.8.12",
     "@types/dotenv": "^8.2.0",
+    "@types/errorhandler": "^1.5.0",
     "@types/express": "^4.17.13",
     "@types/lodash": "^4.14.181",
     "@types/node": "^17.0.23",
+    "@types/validatorjs": "^3.15.0",
     "@typescript-eslint/eslint-plugin": "^5.17.0",
     "@typescript-eslint/parser": "^5.17.0",
     "eslint": "^8.12.0",

@@ -3,7 +3,9 @@ import cors from 'cors';
 import { ENV_ENVIRONMENT } from './utils/secrets.util';
 import { APP_ENV } from './utils/constants.util';
 import _ from 'lodash';
+import bodyParser from 'body-parser';
 import { apiRoutes } from './routes/api.routes';
+import errorHandler from 'errorhandler';
 import { instantiateServices } from './services/instantiate.service';
 
 export class Application {
@@ -17,6 +19,7 @@ export class Application {
     this.APP = express();
     this.PORT = port;
     this.setupCORS();
+    this.initGlobalMiddleware();
     instantiateServices();
     this.initRoutes();
   }
@@ -67,6 +70,12 @@ export class Application {
     };
     this.APP.use(cors(corsOptions));
     this.APP.options('*');
+  }
+
+  private initGlobalMiddleware(): void {
+    this.APP.use(bodyParser.json({ limit: '50mb' }));
+    this.APP.use(bodyParser.urlencoded({ extended: true, limit: '50mb' }));
+    this.APP.use(errorHandler());
   }
 
   private initRoutes(): void {

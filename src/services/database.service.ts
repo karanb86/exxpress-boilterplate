@@ -53,4 +53,4 @@ class DBService {
   }
 }
 
-export const dbService = () => DBService.getInstance();
+export const dbService = DBService.getInstance();
